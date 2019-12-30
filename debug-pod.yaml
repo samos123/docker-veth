@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug-pod
+  labels:
+    app: debug
+spec:
+  hostNetwork: true
+  hostPID: true
+  containers:
+  - name: ubuntu
+    image: gcr.io/gsam-123/docker-toolbox:latest
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+      - name: dockersock
+        mountPath: "/var/run/docker.sock"
+    securityContext:
+      allowPrivilegeEscalation: true
+      privileged: true
+      capabilities:
+        add: ["NET_ADMIN"]
+  volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock
