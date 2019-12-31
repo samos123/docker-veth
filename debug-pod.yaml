@@ -8,8 +8,8 @@ spec:
   hostNetwork: true
   hostPID: true
   containers:
-  - name: ubuntu
-    image: gcr.io/gsam-123/docker-toolbox:latest
+  - name: debug-pod
+    image: samos123/docker-toolbox:latest
     command: [ "/bin/bash", "-c", "--" ]
     args: [ "while true; do sleep 30; done;" ]
     volumeMounts:
